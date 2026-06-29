@@ -32,6 +32,16 @@ Blurred videos: batch_outputs/blurred/
 Debug videos: batch_outputs/debug/
 Log file: batch_outputs/log.csv
 
+## Open results
+
+On macOS, open the blurred output folder with:
+
+open batch_outputs/blurred
+
+To inspect debug videos with detection boxes:
+
+open batch_outputs/debug
+
 ## Tuning
 
 If real faces are missed, lower --det-thresh to 0.35.
