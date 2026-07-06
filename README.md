@@ -1,12 +1,42 @@
 # Face Blur Tool
 
-A Python backend tool for automatically detecting and blurring faces in videos.
+A Python tool for automatically detecting and blurring faces in videos.
+
+This tool supports batch processing. Add videos to an input folder, run one command, and the blurred videos will be saved to an output folder.
+
+## Clone
+
+Clone the repository:
+
+    git clone https://github.com/rishitat-tech/face-blur-tool.git
+    cd face-blur-tool
+
+## Install
+
+Install the required packages:
+
+    pip install -r requirements.txt
+
+If needed, install the main dependencies manually:
+
+    pip install opencv-python numpy tqdm insightface onnxruntime
 
 ## How to Use
+
+Create an input folder:
+
+    mkdir -p input_videos
 
 Add videos to:
 
     input_videos/
+
+Example:
+
+    input_videos/
+      video1.mp4
+      video2.mp4
+      video3.mp4
 
 Then run:
 
@@ -28,11 +58,12 @@ CSV log:
 
 ## Batch Processing
 
-This tool is used for batch processing. You can add multiple videos to the input folder and the tool will process them one by one.
+The tool processes videos one by one from the input folder.
 
-There is no fixed hard limit for how many videos can be added in one batch. The practical limit depends on video length, resolution, storage, and machine performance.
+There is no fixed hard limit for how many videos can be added in one batch. The practical limit depends on video length, resolution, storage, memory, and machine performance.
 
-Recommended:
+Recommended batch sizes:
+
 - Small batch: 5-20 videos
 - Normal batch: 50-200 videos
 - Large batch: 200-500 videos
@@ -44,36 +75,21 @@ Example:
     input_batch_002/
     input_batch_003/
 
-Use --skip-existing so completed videos are not processed again.
+For large batches, use --skip-existing so completed videos are not processed again.
 
-## Backend
+## Recommended Settings
 
-The backend is the Python processing layer.
+Use these default settings:
 
-Main backend files:
+    --det-thresh 0.50
+    --det-size 1024
+    --box-scale 1.25
+    --memory-frames 3
+    --darkness 0.65
 
-    batch_blur_memory.py
-    blur_all_faces_memory.py
+## Notes
 
-The backend handles:
-- reading videos from the input folder
-- detecting faces frame by frame
-- blurring detected faces
-- saving blurred videos
-- saving debug videos
-- writing the CSV log
-- skipping completed videos when --skip-existing is used
-
-## Frontend
-
-A frontend is not required to run this tool right now.
-
-A frontend can be added later for:
-- uploading videos
-- selecting batches
-- starting processing
-- viewing progress
-- previewing outputs
-- downloading blurred videos
-
-If a frontend is added, it should call the backend using the command shown above.
+- Keep input videos in a dedicated folder.
+- Use --skip-existing for large batches.
+- Debug videos are useful for reviewing detection and blur coverage.
+- Processing time depends on video length, resolution, and machine performance.
