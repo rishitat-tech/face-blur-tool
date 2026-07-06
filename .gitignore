@@ -18,3 +18,19 @@ input_videos/*
 *.bak
 *.before_*
 .venv/
+
+# Local backup files
+*.backup
+*_backup.py
+*_backup_*.py
+*_before_*.py
+
+# Model weights
+weights/
+*.pt
+*.onnx
+
+# Outputs / test videos
+batch_outputs/
+input_sample2/
+input_sample2_30/
