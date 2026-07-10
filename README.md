@@ -93,3 +93,18 @@ Use these default settings:
 - Use --skip-existing for large batches.
 - Debug videos are useful for reviewing detection and blur coverage.
 - Processing time depends on video length, resolution, and machine performance.
+
+## Linux setup notes
+
+The pipeline should work on Linux using the same general setup steps. On a fresh Linux machine, install system dependencies with: `sudo apt-get update && sudo apt-get install -y ffmpeg libgl1 libglib2.0-0`
+
+For headless/server environments, use `opencv-python-headless` instead of `opencv-python`.
+
+For CPU-only installs, use: `pip install onnxruntime`
+
+For GPU/CUDA installs, use: `pip install onnxruntime-gpu`
+
+Verify the install with: `ffmpeg -version && python -c "import cv2, h5py, numpy, insightface, onnxruntime; print('ok')" && python -c "import onnxruntime as ort; print(ort.get_available_providers())"`
+
+For GPU runs, the provider list should include `CUDAExecutionProvider`. If it only shows `CPUExecutionProvider`, the job will still run, but it will not use GPU acceleration. Check CUDA/driver compatibility with the installed `onnxruntime-gpu` version.
+
